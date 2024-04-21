@@ -1,0 +1,31 @@
+$color1: #757575;
+$color2: #43936c;
+$color3: #01959f;
+$uncomplete: #ededed;
+$bg: #fafafa;
+$border: #e0e0e0;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 280px;
+  padding: 25px 20px;
+  border-radius: 10px;
+  border: 2px solid $color3;
+
+  .title {
+    color: $color3;
+    font-weight: 600;
+    font-size: 1.4em;
+  }
+  .question {
+    color: black;
+  }
+  .button {
+    margin-top: 30px;
+    background: $color3;
+  }
+}
