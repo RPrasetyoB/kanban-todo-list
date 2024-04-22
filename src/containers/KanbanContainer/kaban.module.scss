@@ -1,0 +1,122 @@
+$color1: #757575;
+$color2: #43936c;
+$border1: #01959f;
+$border2: #feeabc;
+$border3: #f5b1b7;
+$border4: #b8dbca;
+$bg1: #f7feff;
+$bg2: #fffcf5;
+$bg3: #fffafa;
+$bg4: #f8fbf9;
+$uncomplete: #ededed;
+$border: #e0e0e0;
+
+.container {
+  display: flex;
+  flex-direction: row;
+
+  .tasklist {
+    min-width: 100%;
+    height: 100%;
+
+    &:nth-child(1) {
+      min-width: 300px;
+      display: flex;
+      flex-direction: column;
+      background: $bg1;
+      min-width: 326px;
+      border: 1px solid $border1;
+      border-radius: 4px;
+      margin-right: 16px;
+      overflow: auto;
+      padding: 14px;
+
+      .title {
+        border: 1px solid $border1;
+        font-weight: 400;
+        font-size: 12px;
+        padding: 6px 8px;
+        border-radius: 5px;
+        width: auto;
+        color: $border1;
+        font-family: "Nunito Sans", sans-serif;
+        display: inline-block;
+      }
+    }
+
+    &:nth-child(2) {
+      min-width: 300px;
+      display: flex;
+      flex-direction: column;
+      background: $bg2;
+      min-width: 326px;
+      border: 1px solid $border2;
+      border-radius: 4px;
+      margin-right: 16px;
+      overflow: auto;
+      padding: 14px;
+
+      .title {
+        border: 1px solid $border2;
+        font-weight: 400;
+        font-size: 12px;
+        padding: 6px 8px;
+        border-radius: 5px;
+        width: auto;
+        color: #fa9810;
+        font-family: "Nunito Sans", sans-serif;
+        display: inline-block;
+      }
+    }
+
+    &:nth-child(3) {
+      min-width: 300px;
+      display: flex;
+      flex-direction: column;
+      background: $bg3;
+      min-width: 326px;
+      border: 1px solid $border3;
+      border-radius: 4px;
+      margin-right: 16px;
+      overflow: auto;
+      padding: 14px;
+
+      .title {
+        border: 1px solid $border3;
+        font-weight: 400;
+        font-size: 12px;
+        padding: 6px 8px;
+        border-radius: 5px;
+        width: auto;
+        color: #e11428;
+        font-family: "Nunito Sans", sans-serif;
+        display: inline-block;
+      }
+    }
+
+    &:nth-child(4) {
+      min-width: 300px;
+      display: flex;
+      flex-direction: column;
+      background: $bg4;
+      min-width: 326px;
+      border: 1px solid $border4;
+      border-radius: 4px;
+      margin-right: 16px;
+      overflow: auto;
+      padding: 14px;
+
+      .title {
+        border: 1px solid $border4;
+        font-weight: 400;
+        font-size: 12px;
+        padding: 6px 8px;
+        border-radius: 5px;
+        width: auto;
+        color: $color2;
+        font-family: "Nunito Sans", sans-serif;
+        display: inline-block;
+      }
+    }
+  }
+}
