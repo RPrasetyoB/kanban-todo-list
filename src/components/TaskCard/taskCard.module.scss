@@ -1,0 +1,43 @@
+$color1: #757575;
+$color2: #43936c;
+$color3: #01959f;
+$uncomplete: #ededed;
+$bg: #fafafa;
+$border: #e0e0e0;
+
+.cardContainer {
+  .card {
+    margin: 7px 0;
+    height: 120px;
+    width: 326px;
+    background-color: $bg;
+    border: 1px solid $border;
+
+    .content {
+      height: 100%;
+      .title {
+        height: 55px;
+      }
+
+      .divider {
+        display: flex;
+        .line {
+          border-bottom: 1px solid $border;
+          width: 6px;
+        }
+
+        .blank {
+          width: 3px;
+          border-bottom: 1 px solid rgb(255, 255, 255, 0);
+        }
+      }
+
+      .status {
+        display: flex;
+        margin-top: 14px;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+  }
+}

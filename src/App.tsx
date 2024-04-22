@@ -4,7 +4,7 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import { LoginPage, RegisterPage } from "./pages";
+import { Dashboard, LoginPage, RegisterPage } from "./pages";
 
 function App() {
   return (
@@ -12,6 +12,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Navigate to="/v1" />} />
+          <Route path="/v1" element={<Dashboard />} />
           <Route path="/v1/login" element={<LoginPage />} />
           <Route path="/v1/register" element={<RegisterPage />} />
         </Routes>
