@@ -19,3 +19,8 @@ interface CreateTask {
   name: string;
   progress_percentage: number;
 }
+
+interface UpdateTask {
+  target_todo_id: number;
+  name: string;
+}

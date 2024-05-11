@@ -1,0 +1,24 @@
+$color1: #757575;
+$color2: #43936c;
+$color3: #01959f;
+$uncomplete: #ededed;
+$bg: #fafafa;
+$border: #e0e0e0;
+
+.menuList {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  &:hover {
+    .update {
+      color: $color3;
+    }
+  }
+
+  &:hover {
+    .delete {
+      color: red;
+    }
+  }
+}

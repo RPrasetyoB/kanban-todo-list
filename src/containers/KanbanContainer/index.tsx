@@ -125,7 +125,7 @@ const KanbanContainer = () => {
                     </Box>
                   )}
                   {column.items.map((item, index) => (
-                    <TaskCard key={item.id.toString()} item={item} index={index} />
+                    <TaskCard key={item.id.toString()} item={item} index={index} group={columnId} />
                   ))}
                   {provided.placeholder}
                 </Box>

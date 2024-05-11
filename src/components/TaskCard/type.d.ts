@@ -2,4 +2,5 @@
 interface CardProps {
   item: any;
   index: any;
+  group: any;
 }

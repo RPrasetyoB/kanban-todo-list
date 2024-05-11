@@ -107,3 +107,21 @@ export const createNewTask = async (value: CreateTask, id: number) => {
     throw error;
   }
 };
+export const updateTask = async (value: UpdateTask, groupId: string, taskId: string) => {
+  try {
+    const token = localStorage.getItem("auth_token");
+    const response = await fetch(API_URL + `/todos/${groupId}/items/${taskId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(value),
+    });
+
+    return response;
+  } catch (error) {
+    console.error("An error occurred:", error);
+    throw error;
+  }
+};

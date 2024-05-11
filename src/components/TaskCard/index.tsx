@@ -3,12 +3,12 @@ import { Card, Typography, CardContent } from "@mui/material";
 import { Draggable } from "react-beautiful-dnd";
 import complete from "../../assets/Complete_Icon.svg";
 import styles from "./taskCard.module.scss";
-import LinearProgress, {
-  linearProgressClasses,
-} from "@mui/material/LinearProgress";
+import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgress";
 import { styled } from "@mui/material/styles";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import Box from "@mui/material/Box";
+import DropMenu from "../DropMenu";
+import { useState } from "react";
 
 const BorderLinearProgress = styled(LinearProgress)(({ value }) => ({
   height: 16,
@@ -23,11 +23,14 @@ const BorderLinearProgress = styled(LinearProgress)(({ value }) => ({
   },
 }));
 
-const TaskCard: React.FC<CardProps> = ({ item, index }) => {
+const TaskCard: React.FC<CardProps> = ({ item, index, group }) => {
+  const [drop, setDrop] = useState<null | HTMLElement>(null);
+  const [cardId, setCardId] = useState<string>("");
+  const [groupId, setGroupId] = useState<string>("");
+  const [itemName, setItemName] = useState<string>("");
   const totalSections = 60;
   const lineWidthPercentage = 2;
-  const blankWidthPercentage =
-    (100 - lineWidthPercentage) / (totalSections - 1);
+  const blankWidthPercentage = (100 - lineWidthPercentage) / (totalSections - 1);
 
   const sections: any = [];
   for (let i = 0; i < totalSections; i++) {
@@ -41,12 +44,16 @@ const TaskCard: React.FC<CardProps> = ({ item, index }) => {
       />
     );
   }
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setDrop(event.currentTarget);
+    setCardId(item.id);
+    setGroupId(group);
+    setItemName(item.name);
+  };
+
   return (
-    <Draggable
-      key={item.id.toString()}
-      draggableId={item.id.toString()}
-      index={index}
-    >
+    <Draggable key={item.id.toString()} draggableId={item.id.toString()} index={index}>
       {provided => (
         <Box
           className={styles.cardContainer}
@@ -70,30 +77,23 @@ const TaskCard: React.FC<CardProps> = ({ item, index }) => {
               <Box className={styles.divider}>{sections}</Box>
               <Box className={styles.status}>
                 <Box sx={{ display: "flex", alignItems: "center" }}>
-                  <BorderLinearProgress
-                    variant="determinate"
-                    value={item.progress_percentage}
-                  />
+                  <BorderLinearProgress variant="determinate" value={item.progress_percentage} />
                   {item.progress_percentage === null && (
+                    <Typography sx={{ fontSize: "12px", marginLeft: "8px" }}>0%</Typography>
+                  )}
+                  {item.progress_percentage !== 100 && item.progress_percentage !== null && (
                     <Typography sx={{ fontSize: "12px", marginLeft: "8px" }}>
-                      0%
+                      {item.progress_percentage + "%"}
                     </Typography>
                   )}
-                  {item.progress_percentage !== 100 &&
-                    item.progress_percentage !== null && (
-                      <Typography sx={{ fontSize: "12px", marginLeft: "8px" }}>
-                        {item.progress_percentage + "%"}
-                      </Typography>
-                    )}
                   {item.progress_percentage === 100 && (
-                    <img
-                      src={complete}
-                      alt="complete icon"
-                      style={{ width: "16px", marginLeft: "8px" }}
-                    />
+                    <img src={complete} alt="complete icon" style={{ width: "16px", marginLeft: "8px" }} />
                   )}
                 </Box>
-                <MoreHorizIcon sx={{ width: "22px", color: "#757575" }} />
+                <Box component="button" onClick={handleClick} sx={{ background: "transparent", border: "none" }}>
+                  <MoreHorizIcon sx={{ width: "22px", color: "#757575" }} />
+                </Box>
+                <DropMenu groupId={groupId} taskId={cardId} drop={drop} setDrop={setDrop} itemName={itemName} />
               </Box>
             </CardContent>
           </Card>
