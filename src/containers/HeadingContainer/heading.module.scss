@@ -1,0 +1,28 @@
+$color1: #b8dbca;
+$color2: #01959f;
+
+.container {
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  gap: 10px;
+
+  .button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border-radius: 8px;
+    padding: 4px 16px;
+    border: none;
+    background-color: $color2;
+    width: 138px;
+    height: 28px;
+
+    &:hover {
+      cursor: pointer;
+    }
+    &:active {
+      background-color: $color1;
+    }
+  }
+}

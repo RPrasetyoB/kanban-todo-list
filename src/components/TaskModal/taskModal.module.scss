@@ -1,0 +1,39 @@
+$color1: #ffffff;
+$color2: #e0e0e0;
+$color3: #01959f;
+
+.container {
+  padding: 100px;
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .title {
+      margin-top: 6px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: right;
+      margin-top: 12px;
+
+      .cancel {
+        width: 76px;
+        border-radius: 8px;
+        background-color: $color1;
+        border: solid 1px $color2;
+        padding: 4px 16px;
+      }
+
+      .submit {
+        border-radius: 8px;
+        background-color: $color3;
+        border: none;
+        padding: 4px 16px;
+      }
+    }
+  }
+}

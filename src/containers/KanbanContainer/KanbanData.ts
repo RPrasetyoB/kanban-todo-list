@@ -15,7 +15,7 @@ const taskList = [
     todo_id: 1,
     created_at: "2021-04-21T00:14:38.397Z",
     updated_at: "2021-04-21T00:14:38.397Z",
-    progress_percentage: 60,
+    progress_percentage: 100,
   },
 ];
 

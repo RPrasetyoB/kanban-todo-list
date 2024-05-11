@@ -1,31 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Card, Typography, CardContent } from "@mui/material";
 import { Draggable } from "react-beautiful-dnd";
-import Box from "@mui/material/Box";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import complete from "../../assets/Complete_Icon.svg";
 import styles from "./taskCard.module.scss";
 import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
 import { styled } from "@mui/material/styles";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import Box from "@mui/material/Box";
 
-interface CardProps {
-  item: any;
-  index: any;
-}
-
-const BorderLinearProgress = styled(LinearProgress)(({ theme, value }) => ({
+const BorderLinearProgress = styled(LinearProgress)(({ value }) => ({
   height: 16,
   borderRadius: 10,
-  width: "216px",
+  width: "195px",
   [`&.${linearProgressClasses.colorPrimary}`]: {
-    backgroundColor:
-      theme.palette.grey[theme.palette.mode === "light" ? 200 : 800],
+    backgroundColor: 200,
   },
   [`& .${linearProgressClasses.bar}`]: {
     borderRadius: 5,
-    backgroundColor: value === 100 ? "#01959f" : "#43936c",
+    backgroundColor: value === 100 ? "#43936c" : "#01959f",
   },
 }));
 
@@ -75,29 +69,31 @@ const TaskCard: React.FC<CardProps> = ({ item, index }) => {
               </Box>
               <Box className={styles.divider}>{sections}</Box>
               <Box className={styles.status}>
-                <Box sx={{ display: "flex" }}>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
                   <BorderLinearProgress
                     variant="determinate"
                     value={item.progress_percentage}
                   />
                   {item.progress_percentage === null && (
-                    <Typography sx={{ fontSize: "12px", marginLeft: "10px" }}>
+                    <Typography sx={{ fontSize: "12px", marginLeft: "8px" }}>
                       0%
                     </Typography>
                   )}
                   {item.progress_percentage !== 100 &&
                     item.progress_percentage !== null && (
-                      <Typography sx={{ fontSize: "12px", marginLeft: "10px" }}>
+                      <Typography sx={{ fontSize: "12px", marginLeft: "8px" }}>
                         {item.progress_percentage + "%"}
                       </Typography>
                     )}
                   {item.progress_percentage === 100 && (
-                    <CheckCircleIcon
-                      sx={{ color: "green", bgcolor: "white" }}
+                    <img
+                      src={complete}
+                      alt="complete icon"
+                      style={{ width: "16px", marginLeft: "8px" }}
                     />
                   )}
                 </Box>
-                <MoreHorizIcon sx={{ width: "24px", color: "#757575" }} />
+                <MoreHorizIcon sx={{ width: "22px", color: "#757575" }} />
               </Box>
             </CardContent>
           </Card>

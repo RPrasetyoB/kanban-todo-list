@@ -5,10 +5,11 @@ import {
   Navigate,
 } from "react-router-dom";
 import { Dashboard, LoginPage, RegisterPage } from "./pages";
+import GlobalState from "./utils/globalStateProvider";
 
 function App() {
   return (
-    <>
+    <GlobalState>
       <Router>
         <Routes>
           <Route path="/" element={<Navigate to="/v1" />} />
@@ -17,7 +18,7 @@ function App() {
           <Route path="/v1/register" element={<RegisterPage />} />
         </Routes>
       </Router>
-    </>
+    </GlobalState>
   );
 }
 

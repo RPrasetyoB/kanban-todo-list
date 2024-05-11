@@ -1,24 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Box from "@mui/material/Box";
 import styles from "./login.module.scss";
 import { TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import LoadingButton from "@mui/lab/LoadingButton";
+import { LoadingButton } from "@mui/lab";
 import { loginUser } from "../../utils/fetchApi";
 import { Link, useNavigate } from "react-router-dom";
 import { AlertBar } from "../../components";
+import Box from "@mui/material/Box";
 
 const formStyle = {
   "& .MuiOutlinedInput-root": {
     color: "#000",
     fontFamily: "Arial",
     "& .MuiOutlinedInput-notchedOutline": {
-      borderColor: "#01959f",
+      borderColor: "#01959f !important",
       borderWidth: "1px",
     },
   },
   "& .MuiInputLabel-outlined": {
-    color: "#01959f",
+    color: "#01959f !important",
   },
 };
 

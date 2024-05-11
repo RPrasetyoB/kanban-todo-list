@@ -9,3 +9,13 @@ interface LoginUser {
   email: string;
   password: string;
 }
+
+interface CreateGroup {
+  title: string;
+  description: string;
+}
+
+interface CreateTask {
+  name: string;
+  progress_percentage: number;
+}

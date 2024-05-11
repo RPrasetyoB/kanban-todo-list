@@ -1,6 +1,6 @@
-import Box from "@mui/material/Box";
 import { LoginContainer } from "../../containers";
 import styles from "./login.module.scss";
+import Box from "@mui/material/Box";
 
 const LoginPage = () => {
   return (

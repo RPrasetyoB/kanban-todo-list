@@ -1,22 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import Box from "@mui/material/Box";
 import styles from "./kaban.module.scss";
-import { todos } from "./KanbanData";
-import { TaskCard } from "../../components";
-
-interface Column {
-  id: number;
-  title: string;
-  items: any[];
-  created_by: string;
-  created_at: string;
-  updated_at: string;
-}
+import { AddTaskModal, TaskCard } from "../../components";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import Box from "@mui/material/Box";
+import { Typography } from "@mui/material";
+import { PublicData } from "../../utils/globalStateProvider";
+import { getGroup, getItemList } from "../../utils/fetchApi";
 
 const KanbanContainer = () => {
-  const initialColumns = todos.reduce((acc, curr) => {
+  const [addTaskModal, setAddTaskModal] = useState(false);
+  const [groupId, setGroupId] = useState(0);
+  const { todoList, dataChanged } = useContext(PublicData);
+  const initialColumns = todoList?.reduce((acc, curr) => {
     acc[curr.id.toString()] = curr;
     return acc;
   }, {} as { [key: string]: Column });
@@ -24,11 +21,42 @@ const KanbanContainer = () => {
     initialColumns
   );
 
+  useEffect(() => {
+    const fetchTodos = async () => {
+      try {
+        const response = await getGroup();
+        const todosData = await response.json();
+        if (response.ok) {
+          const updatedColumns: { [key: string]: Column } = {};
+          await Promise.all(
+            Object.values(todosData).map(async (todo: any) => {
+              const itemsResponse = await getItemList(todo.id);
+              const itemsData = await itemsResponse.json();
+              if (itemsResponse.ok) {
+                const filteredItems = itemsData.filter(
+                  (item: any) => item.todo_id === todo.id
+                );
+                updatedColumns[todo.id] = {
+                  title: todo.title,
+                  items: filteredItems,
+                };
+              }
+            })
+          );
+          setColumns(updatedColumns);
+        }
+      } catch (error) {
+        console.error("Error fetching todos:", error);
+      }
+    };
+    fetchTodos();
+  }, [dataChanged]);
+
   const subTitle = [
     "January - March",
     "April - June",
     "July - September",
-    "October - Desember",
+    "October - December",
   ];
 
   const onDragEnd = (result: any) => {
@@ -39,9 +67,8 @@ const KanbanContainer = () => {
     const sourceColumn = updatedColumns[source.droppableId];
     const destColumn = updatedColumns[destination.droppableId];
 
-    // If the source and destination columns are the same
     if (source.droppableId === destination.droppableId) {
-      const newItems = [...sourceColumn.items];
+      const newItems = Array.from(sourceColumn.items);
       const [removed] = newItems.splice(source.index, 1);
       newItems.splice(destination.index, 0, removed);
 
@@ -53,8 +80,8 @@ const KanbanContainer = () => {
         },
       });
     } else {
-      const sourceItems = [...sourceColumn.items];
-      const destItems = [...destColumn.items];
+      const sourceItems = Array.from(sourceColumn.items);
+      const destItems = Array.from(destColumn.items);
       const [removed] = sourceItems.splice(source.index, 1);
       destItems.splice(destination.index, 0, removed);
 
@@ -92,6 +119,20 @@ const KanbanContainer = () => {
                     </Box>
                     <span className={styles.subTitle}>{subTitle[index]}</span>
                   </Box>
+                  {column.items.length === 0 && (
+                    <Box className={styles.empty}>
+                      <Typography
+                        sx={{
+                          fontFamily: "Nunito Sans, sans-serif",
+                          fontSize: "14px",
+                          fontWeight: 400,
+                          color: "#757575",
+                        }}
+                      >
+                        No Task
+                      </Typography>
+                    </Box>
+                  )}
                   {column.items.map((item, index) => (
                     <TaskCard
                       key={item.id.toString()}
@@ -101,6 +142,29 @@ const KanbanContainer = () => {
                   ))}
                   {provided.placeholder}
                 </Box>
+                <button
+                  className={styles.button}
+                  onClick={() => {
+                    setAddTaskModal(true);
+                    setGroupId(parseInt(columnId));
+                  }}
+                >
+                  <AddCircleOutlineIcon sx={{ width: "20px" }} />
+                  <Typography
+                    sx={{
+                      fontSize: "12px",
+                      fontFamily: "Nunito Sans, sans-serif",
+                      fontWeight: 400,
+                    }}
+                  >
+                    New Task
+                  </Typography>
+                </button>
+                <AddTaskModal
+                  open={addTaskModal}
+                  setOpen={setAddTaskModal}
+                  column={groupId}
+                />
               </Box>
             )}
           </Droppable>
