@@ -1,30 +1,34 @@
-# React + TypeScript + Vite
+# React TypeScript Todo List Documentation
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+This documentation provides information about the React TypeScript Todo List project. It's a simple to-do list application built using React and TypeScript, with a Kanban board interface for task management.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies Used
 
-## Expanding the ESLint configuration
+- React
+- TypeScript
+- Styled Components (for styling)
+- Kanban Board (for task visualization)
+- Material UI
+- SASS
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Project Structure
 
-- Configure the top-level `parserOptions` property like this:
+- `src/`: Contains React components, Redux store setup, and other application logic.
+- `public/`: Public assets such as index.html.
+- `package.json`: Project dependencies and scripts.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Setup Instructions
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+1. Clone the repository.
+2. Navigate to the project directory.
+3. Install dependencies.
+4. Start the development server.
+5. Access the application in your browser.
+
+## Kanban Board
+
+Utilize any Kanban board tool like Trello or Jira for visual task management.
+
+# 
