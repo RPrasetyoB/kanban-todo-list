@@ -17,9 +17,7 @@ const KanbanContainer = () => {
     acc[curr.id.toString()] = curr;
     return acc;
   }, {} as { [key: string]: Column });
-  const [columns, setColumns] = useState<{ [key: string]: Column }>(
-    initialColumns
-  );
+  const [columns, setColumns] = useState<{ [key: string]: Column }>(initialColumns);
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -33,10 +31,8 @@ const KanbanContainer = () => {
               const itemsResponse = await getItemList(todo.id);
               const itemsData = await itemsResponse.json();
               if (itemsResponse.ok) {
-                const filteredItems = itemsData.filter(
-                  (item: any) => item.todo_id === todo.id
-                );
-                updatedColumns[todo.id] = {
+                const filteredItems = itemsData.filter((item: any) => item.todo_id === todo.id);
+                (updatedColumns[todo.id] as any) = {
                   title: todo.title,
                   items: filteredItems,
                 };
@@ -52,12 +48,7 @@ const KanbanContainer = () => {
     fetchTodos();
   }, [dataChanged]);
 
-  const subTitle = [
-    "January - March",
-    "April - June",
-    "July - September",
-    "October - December",
-  ];
+  const subTitle = ["January - March", "April - June", "July - September", "October - December"];
 
   const onDragEnd = (result: any) => {
     const { source, destination } = result;
@@ -134,11 +125,7 @@ const KanbanContainer = () => {
                     </Box>
                   )}
                   {column.items.map((item, index) => (
-                    <TaskCard
-                      key={item.id.toString()}
-                      item={item}
-                      index={index}
-                    />
+                    <TaskCard key={item.id.toString()} item={item} index={index} />
                   ))}
                   {provided.placeholder}
                 </Box>
@@ -160,11 +147,7 @@ const KanbanContainer = () => {
                     New Task
                   </Typography>
                 </button>
-                <AddTaskModal
-                  open={addTaskModal}
-                  setOpen={setAddTaskModal}
-                  column={groupId}
-                />
+                <AddTaskModal open={addTaskModal} setOpen={setAddTaskModal} column={groupId} />
               </Box>
             )}
           </Droppable>
