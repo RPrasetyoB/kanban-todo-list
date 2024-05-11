@@ -6,7 +6,7 @@ This documentation provides information about the React TypeScript Todo List pro
 
 ## Technologies Used
 
-- React
+- React Vite
 - TypeScript
 - Styled Components (for styling)
 - Kanban Board (for task visualization)
@@ -21,11 +21,31 @@ This documentation provides information about the React TypeScript Todo List pro
 
 ## Setup Instructions
 
-1. Clone the repository.
-2. Navigate to the project directory.
-3. Install dependencies.
-4. Start the development server.
-5. Access the application in your browser.
+1. Clone the repository: 
+   
+   ```bash
+   git clone https://github.com/RPrasetyoB/kanban-todo-list.git
+   ```
+2. Navigate to the project directory:
+   
+   ```bash
+   cd kanban-todo-list
+   ```
+3. Install dependencies:
+   
+   ```bash
+   npm install
+   ```
+4. Start the client:
+   
+   ```bash
+   npm run dev
+   ```
+5. Access the application in your browser:
+   
+   ```url
+   http://localhost:5173
+   ```
 
 ## Kanban Board
 
