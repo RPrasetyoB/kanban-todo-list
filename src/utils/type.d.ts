@@ -1,8 +1,6 @@
 interface RegisterUser {
-  name: string;
   email: string;
   password: string;
-  password_confirmation: string;
 }
 
 interface LoginUser {
@@ -16,11 +14,13 @@ interface CreateGroup {
 }
 
 interface CreateTask {
+  todo_id: number;
   name: string;
   progress_percentage: number;
 }
 
 interface UpdateTask {
-  target_todo_id: number;
-  name: string;
+  todo_id: number;
+  name: string | null | undefined;
+  progress_percentage: number | null | undefined;
 }

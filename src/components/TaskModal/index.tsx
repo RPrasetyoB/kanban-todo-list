@@ -52,11 +52,11 @@ const AddTaskModal: React.FC<GroupModalProps> = ({ open, setOpen, column }) => {
 
   const handlePercentage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    const regex = /^(\d{0,2}|100)%?$/; // Adjusted regex pattern to allow up to 3 digits and 100
+    const regex = /^(\d{0,2}|100)%?$/;
     if (regex.test(value)) {
       setInputPercentage(value);
       const numericValue = parseFloat(value.replace("%", ""));
-      setPercentage(isNaN(numericValue) ? 0 : Math.min(100, numericValue)); // Ensure the value is between 0 and 100
+      setPercentage(isNaN(numericValue) ? 0 : Math.min(100, numericValue));
     }
   };
 
@@ -66,6 +66,7 @@ const AddTaskModal: React.FC<GroupModalProps> = ({ open, setOpen, column }) => {
     try {
       const response = await createNewTask(
         {
+          todo_id: 0,
           name: taskName,
           progress_percentage: percentage,
         },
@@ -175,11 +176,7 @@ const AddTaskModal: React.FC<GroupModalProps> = ({ open, setOpen, column }) => {
               }}
             />
             <Box className={styles.buttons}>
-              <button
-                onClick={handleClose}
-                className={styles.cancel}
-                type="button"
-              >
+              <button onClick={handleClose} className={styles.cancel} type="button">
                 <Typography
                   sx={{
                     fontWeight: 700,

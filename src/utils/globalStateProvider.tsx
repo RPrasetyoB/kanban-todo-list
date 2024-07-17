@@ -1,10 +1,4 @@
-import {
-  createContext,
-  ReactNode,
-  useState,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { createContext, ReactNode, useState, Dispatch, SetStateAction } from "react";
 
 interface Props {
   children: ReactNode;
@@ -21,7 +15,7 @@ export interface Task {
 }
 
 export interface Todo {
-  id: number;
+  ID: number;
   title: string;
   items: Task[];
   created_by: string;

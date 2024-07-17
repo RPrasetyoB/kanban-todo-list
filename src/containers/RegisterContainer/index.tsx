@@ -23,9 +23,6 @@ const formStyle = {
 };
 
 const RegisterContainer = () => {
-  const [name, setName] = useState("");
-  const [nameError, setNameError] = useState(false);
-  const [nameHelper, setNameHelper] = useState("");
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [password, setPassword] = useState("");
@@ -40,19 +37,6 @@ const RegisterContainer = () => {
   const [alertMessage, setAlertMessage] = useState("");
 
   const navigate = useNavigate();
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-    if (e.target.value.length < 3) {
-      setNameError(true);
-      setNameHelper("Name must be at least 3 characters long");
-    } else if (!/^[a-zA-Z ]+$/.test(e.target.value)) {
-      setNameError(true);
-      setNameHelper("Name must contain only letters and spaces");
-    } else {
-      setNameError(false);
-      setNameHelper("");
-    }
-  };
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
     setConfirmPassword("");
@@ -88,10 +72,8 @@ const RegisterContainer = () => {
     setIsSubmiting(true);
     try {
       const response = await registerUser({
-        name,
         email,
         password,
-        password_confirmation: confirmPassword,
       });
       if (response.ok) {
         setIsSubmited(true);
@@ -111,16 +93,6 @@ const RegisterContainer = () => {
   return (
     <Box className={styles.container} component="form" onSubmit={handleSubmit}>
       <Typography className={styles.title}>Login Form</Typography>
-      <TextField
-        fullWidth
-        required
-        label="Name"
-        value={name}
-        onChange={handleNameChange}
-        error={nameError}
-        helperText={nameHelper}
-        sx={formStyle}
-      />
       <TextField
         fullWidth
         required
@@ -169,7 +141,7 @@ const RegisterContainer = () => {
         variant="contained"
         color="primary"
         type="submit"
-        disabled={!name || !email || nameError || emailError || isSubmited}
+        disabled={!email || emailError || isSubmited}
       >
         Submit
       </LoadingButton>

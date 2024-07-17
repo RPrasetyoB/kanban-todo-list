@@ -47,19 +47,22 @@ const TaskCard: React.FC<CardProps> = ({ item, index, group }) => {
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setDrop(event.currentTarget);
-    setCardId(item.id);
+    setCardId(item.ID);
     setGroupId(group);
     setItemName(item.name);
   };
 
   return (
-    <Draggable key={item.id.toString()} draggableId={item.id.toString()} index={index}>
+    <Draggable key={item.ID.toString()} draggableId={item.ID.toString()} index={index}>
       {provided => (
         <Box
           className={styles.cardContainer}
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
+          data-id={item.ID}
+          data-name={item.name}
+          data-progress_percentage={item.progress_percentage}
         >
           <Card className={styles.card}>
             <CardContent className={styles.content}>
@@ -87,13 +90,27 @@ const TaskCard: React.FC<CardProps> = ({ item, index, group }) => {
                     </Typography>
                   )}
                   {item.progress_percentage === 100 && (
-                    <img src={complete} alt="complete icon" style={{ width: "16px", marginLeft: "8px" }} />
+                    <img
+                      src={complete}
+                      alt="complete icon"
+                      style={{ width: "16px", marginLeft: "8px" }}
+                    />
                   )}
                 </Box>
-                <Box component="button" onClick={handleClick} sx={{ background: "transparent", border: "none" }}>
+                <Box
+                  component="button"
+                  onClick={handleClick}
+                  sx={{ background: "transparent", border: "none" }}
+                >
                   <MoreHorizIcon sx={{ width: "22px", color: "#757575" }} />
                 </Box>
-                <DropMenu groupId={groupId} taskId={cardId} drop={drop} setDrop={setDrop} itemName={itemName} />
+                <DropMenu
+                  groupId={groupId}
+                  taskId={cardId}
+                  drop={drop}
+                  setDrop={setDrop}
+                  itemName={itemName}
+                />
               </Box>
             </CardContent>
           </Card>

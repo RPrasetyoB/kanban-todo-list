@@ -55,7 +55,7 @@ const LoginContainer = () => {
       });
       if (response?.ok) {
         const data = await response.json();
-        localStorage.setItem("auth_token", data.auth_token);
+        localStorage.setItem("auth_token", data.data.token);
         setIsSubmited(true);
         setAlertModal(1);
         setTimeout(() => {
